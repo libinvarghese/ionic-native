@@ -44,7 +44,7 @@ export interface StreamingAudioOptions {
   pluginName: 'StreamingMedia',
   plugin: 'cordova-plugin-streaming-media',
   pluginRef: 'plugins.streamingMedia',
-  repo: 'https://github.com/nchutchind/cordova-plugin-streaming-media',
+  repo: 'https://github.com/libinvarghese/cordova-plugin-streaming-media',
   platforms: ['Amazon Fire OS', 'Android', 'iOS']
 })
 @Injectable()
@@ -83,4 +83,34 @@ export class StreamingMedia extends IonicNativePlugin {
   @Cordova({ sync: true, platforms: ['iOS'] })
   resumeAudio(): void { }
 
+  /**
+   * Load State
+   */
+  @Cordova({ sync: true, platforms: ['iOS'] })
+  loadState(): number { return; }
+
+  /**
+   * Playback State
+   */
+  @Cordova({ sync: true, platforms: ['iOS'] })
+  playbackState(): number { return; }
+
+  /**
+   * Subscribe
+   */
+  @Cordova({ sync: true, platforms: ['iOS'] })
+  subscribe(event: string, onEvent: (value: number) => void): void { return; }
+
+  /**
+   * Unsubscribe
+   */
+  @Cordova({ sync: true, platforms: ['iOS'] })
+  unsubscribe(event: string, onEvent: (value: number) => void): void { return; }
+}
+
+export namespace StreamingMedia {
+  export enum Events {
+    loadState = 'loadState',
+    playbackState = 'playbackState'
+  }
 }
