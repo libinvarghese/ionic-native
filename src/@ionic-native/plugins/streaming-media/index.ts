@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Plugin, Cordova, IonicNativePlugin } from '@ionic-native/core';
+import { Observable } from 'rxjs/Observable';
 
 export interface StreamingVideoOptions {
   successCallback?: Function;
@@ -86,31 +87,46 @@ export class StreamingMedia extends IonicNativePlugin {
   /**
    * Load State
    */
-  @Cordova({ sync: true, platforms: ['iOS'] })
-  loadState(): number { return; }
+  @Cordova({ platforms: ['iOS'] })
+  loadState(): Promise<number> { return; }
 
   /**
    * Playback State
    */
-  @Cordova({ sync: true, platforms: ['iOS'] })
-  playbackState(): number { return; }
+  @Cordova({ platforms: ['iOS'] })
+  playbackState(): Promise<number> { return; }
 
   /**
-   * Subscribe
+   * Watch
    */
-  @Cordova({ sync: true, platforms: ['iOS'] })
-  subscribe(event: string, onEvent: (value: number) => void): void { return; }
-
-  /**
-   * Unsubscribe
-   */
-  @Cordova({ sync: true, platforms: ['iOS'] })
-  unsubscribe(event: string, onEvent: (value: number) => void): void { return; }
+  @Cordova({
+    observable: true,
+    clearFunction: 'unwatch',
+    clearWithArgs: true,
+    platforms: ['iOS']
+  })
+  watch(event: string): Observable<number> { return; }
 }
 
 export namespace StreamingMedia {
   export enum Events {
     loadState = 'loadState',
     playbackState = 'playbackState'
+  }
+
+  export enum PlaybackState {
+    MPMoviePlaybackStateStopped,
+    MPMoviePlaybackStatePlaying,
+    MPMoviePlaybackStatePaused,
+    MPMoviePlaybackStateInterrupted,
+    MPMoviePlaybackStateSeekingForward,
+    MPMoviePlaybackStateSeekingBackward
+  }
+
+  export enum LoadState {
+    MPMovieLoadStateUnknown = 0,
+    MPMovieLoadStatePlayable = 1 << 0,
+    MPMovieLoadStatePlaythroughOK = 1 << 1, // Playback will be automatically started in this state when shouldAutoplay is YES
+    MPMovieLoadStateStalled = 1 << 2, // Playback will be automatically paused in this state, if started
   }
 }
