@@ -16,6 +16,9 @@ npm install @ionic-native/core --save
 
 You also need to install the Ionic Native package for each plugin you want to add. Please see the [Ionic Native documentation](https://ionicframework.com/docs/native/) for complete instructions on how to add and use the plugins.
 
+### Installation from local repo
+Refer [DEVELOPER.md]
+
 ## Documentation
 
 For the full Ionic Native documentation, please visit [https://ionicframework.com/docs/native/](https://ionicframework.com/docs/native/).
