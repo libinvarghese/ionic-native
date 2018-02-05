@@ -132,6 +132,11 @@ export interface CategoryActionData {
 
 export interface AndroidPushOptions {
   /**
+   * Maps to the project number in the Google Developer Console.
+   */
+  senderID: string;
+
+  /**
    * The name of a drawable resource to use as the small-icon. The name should
    * not include the extension.
    */
@@ -257,7 +262,7 @@ export type PushEvent = string;
  * }).then(() => console.log('Channel created'));
  *
  * // Delete a channel (Android O and above)
- * this.push.deleteChannel('testchannel1').then(() => console.log('Channel deleted));
+ * this.push.deleteChannel('testchannel1').then(() => console.log('Channel deleted'));
  *
  * // Return a list of currently configured channels
  * this.push.listChannels().then((channels) => console.log('List of channels', channels))
